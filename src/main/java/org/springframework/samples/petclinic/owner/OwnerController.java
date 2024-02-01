@@ -49,6 +49,8 @@ class OwnerController {
 
 	private final OwnerRepository owners;
 
+	public int OwnerToDelete = 0;
+
 	public OwnerController(OwnerRepository clinicService) {
 		this.owners = clinicService;
 	}
@@ -160,6 +162,24 @@ class OwnerController {
 		Owner owner = this.owners.findById(ownerId);
 		mav.addObject(owner);
 		return mav;
+	}
+
+	@GetMapping("/owners/{ownerId}/remove")
+	public ModelAndView DeleteOwner(@PathVariable("ownerId") int ownerId) {
+		ModelAndView mav = new ModelAndView("owners/ownerDelete");
+		OwnerToDelete = ownerId;
+		return mav;
+	}
+
+	@GetMapping("/owners/delete")
+	public String DeleteAct(Model model) {
+		if (OwnerToDelete != 0) {
+			this.owners.RemoveOwner(OwnerToDelete);
+			return "redirect:/owners";
+		}
+		else {
+			return "redirect:/";
+		}
 	}
 
 }

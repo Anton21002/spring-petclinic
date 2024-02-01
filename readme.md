@@ -160,3 +160,10 @@ For pull requests, editor preferences are available in the [editor config](.edit
 ## License
 
 The Spring PetClinic sample application is released under version 2.0 of the [Apache License](https://www.apache.org/licenses/LICENSE-2.0).
+
+
+## To Do
+Add a page for deleting  visit . For that , create a page to confirm the action and redirect back to owner find
+## Note 
+Run mvn spring-javaformat:apply to update the formatting check
+ 

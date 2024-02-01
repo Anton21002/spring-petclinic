@@ -1,0 +1,15 @@
+<html xmlns:th="https://www.thymeleaf.org"
+  th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
+
+<body>
+
+<h2>Delete an owner</h2>
+
+<p>Are you sure you want to delete?</p>
+
+<a th:href="@{/}" class="btn btn-primary">Return to main</a>
+<a th:href="@{/owners/delete}" class="btn btn-primary">Yes</a>
+
+
+</body>
+</html>
