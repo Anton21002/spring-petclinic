@@ -1,3 +1,5 @@
+# Original Description 
+
 # Spring PetClinic Sample Application [![Build Status](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml/badge.svg)](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml)
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/spring-projects/spring-petclinic) [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=7517918)
@@ -161,9 +163,28 @@ For pull requests, editor preferences are available in the [editor config](.edit
 
 The Spring PetClinic sample application is released under version 2.0 of the [Apache License](https://www.apache.org/licenses/LICENSE-2.0).
 
+# End Of Original Description
 
-## To Do
-Add a page for deleting  visit . For that , create a page to confirm the action and redirect back to owner find
+## What Was Done
+Add a page for deleting owner . For that , create a page to confirm the action,Run the deletion on the other page to avoid errors and redirect back to owner find
 ## Note 
-Run mvn spring-javaformat:apply to update the formatting check
- 
+1. !! Replace the annotated with !! variable values in 
+main/resources/application.properties and application-mysql.properties
+before the first launch
+2.After Booting up The Shell editor ALWAYS run this two commands in the terminal 
+cd spring-petclinic/ 
+replace spring-petclinic/ with your own directory where pom.xml is located
+gcloud config set project cloud-computing-123456
+ , replace cloud-computing-123456 with your own Project ID found in Cloud Overview
+3.Make sure that both App Engine And your SQL instance are running (not updating) in Google Cloud
+4.Run mvn spring-javaformat:apply to fix formating error ,run it every time you change a file before
+ mvn spring-boot:run  
+5.Dont know if gcloud app deploy is useful as shell editor saves automatically if set,but do check if it does
+File-> Auto-Save should be ticked
+app is deployed via spring boot anyway
+6. there could be a problem with github that it does not recognise you
+git config --global user.email youremail@example.com
+git config --global user.name "FIRST_NAME LAST_NAME"
+7. Im not sure that you need a principal for this project or not (IAM in Google Cloud)
+8.Link to original installation process (Its already done here and updated to fit and fix the project)
+https://codelabs.developers.google.com/codelabs/cloud-spring-petclinic-cloudsql/index.html 

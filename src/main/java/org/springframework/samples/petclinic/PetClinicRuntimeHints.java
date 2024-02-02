@@ -22,6 +22,7 @@ import org.springframework.samples.petclinic.model.BaseEntity;
 import org.springframework.samples.petclinic.model.Person;
 import org.springframework.samples.petclinic.vet.Vet;
 
+//Class used to register hints to optimise runtime
 public class PetClinicRuntimeHints implements RuntimeHintsRegistrar {
 
 	@Override

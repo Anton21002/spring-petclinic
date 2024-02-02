@@ -23,11 +23,18 @@ import jakarta.persistence.MappedSuperclass;
  * a base class for objects needing these properties.
  *
  * @author Ken Krebs
- * @author Juergen Hoeller
+ * @author Juergen Hoeller TL:DR This class is the extension of BaseEntity and is used as
+ * a base for Pet.java - this class provides a table variable name with its interactions
+ * for example pets which by default should have an id and a name but may have some extra
+ * attribute such as birth date ,animal type and exc.
  */
 @MappedSuperclass
 public class NamedEntity extends BaseEntity {
 
+	/**
+	 * Here @Column adds a normal non-primary key to the table with it's identifying name
+	 * being "name" in the database
+	 */
 	@Column(name = "name")
 	private String name;
 
@@ -39,6 +46,8 @@ public class NamedEntity extends BaseEntity {
 		this.name = name;
 	}
 
+	// Override is used to change usual behaviour of java - toString usually transforms a
+	// predefined variable into string
 	@Override
 	public String toString() {
 		return this.getName();

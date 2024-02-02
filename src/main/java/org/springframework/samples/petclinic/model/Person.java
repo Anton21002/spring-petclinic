@@ -20,13 +20,16 @@ import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.NotBlank;
 
 /**
- * Simple JavaBean domain object representing an person.
+ * Simple JavaBean domain object representing an person. TL:DR This Superclass is used for
+ * Owner.java and Vet.java and is also an extension of BaseEntity It is used to get and
+ * set the names and surnames of every person
  *
  * @author Ken Krebs
  */
 @MappedSuperclass
 public class Person extends BaseEntity {
 
+	// @NotBlank checks that the variable should not be null
 	@Column(name = "first_name")
 	@NotBlank
 	private String firstName;

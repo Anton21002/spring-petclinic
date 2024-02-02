@@ -35,12 +35,16 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Juergen Hoeller
  * @author Sam Brannen
  * @author Michael Isvy
+ *
+ * This Repository is used for interactions with a database via sending it queries
  */
 public interface OwnerRepository extends Repository<Owner, Integer> {
 
 	/**
 	 * Retrieve all {@link PetType}s from the data store.
-	 * @return a Collection of {@link PetType}s.
+	 * @return a Collection of {@link PetType}s. Quert is read like this : SELECT ptyle
+	 * FROM (PetType ptype) ptype Order BY ptype.name PetType ptype connects
+	 * springframework(PetType.java) with MySQL(ptype table)
 	 */
 	@Query("SELECT ptype FROM PetType ptype ORDER BY ptype.name")
 	@Transactional(readOnly = true)
@@ -52,6 +56,7 @@ public interface OwnerRepository extends Repository<Owner, Integer> {
 	 * @param lastName Value to search for
 	 * @return a Collection of matching {@link Owner}s (or an empty Collection if none
 	 * found)
+	 *
 	 */
 
 	@Query("SELECT DISTINCT owner FROM Owner owner left join  owner.pets WHERE owner.lastName LIKE :lastName% ")
@@ -62,6 +67,8 @@ public interface OwnerRepository extends Repository<Owner, Integer> {
 	 * Retrieve an {@link Owner} from the data store by id.
 	 * @param id the id to search for
 	 * @return the {@link Owner} if found
+	 * @Param is used to declare variables in the queries example @Param ("myfriend")... /
+	 * ("... WHERE greeting.friend = :myfriend ") "myfriend" == :myfriend
 	 */
 	@Query("SELECT owner FROM Owner owner  WHERE owner.id =:id")
 	@Transactional(readOnly = true)
@@ -80,6 +87,12 @@ public interface OwnerRepository extends Repository<Owner, Integer> {
 	@Transactional(readOnly = true)
 	Page<Owner> findAll(Pageable pageable);
 
+	/**
+	 * My Delete Function
+	 * @Modifying is needed when query requires changing variables like UPDATE
+	 * ,DELETE,INSERT and not just SELECT It will throw an error otherwise
+	 *
+	 */
 	@Query("DELETE FROM Owner owner  WHERE owner.id =:id")
 	@Modifying
 	@Transactional

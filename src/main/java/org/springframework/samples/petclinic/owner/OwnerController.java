@@ -40,11 +40,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author Juergen Hoeller
  * @author Ken Krebs
  * @author Arjen Poutsma
- * @author Michael Isvy
+ * @author Michael Isvy The @Controller is responsible for front-end of the project - page
+ * addreses,html page to load,sending requests, handling responses , redirecting on
+ * completion
  */
 @Controller
 class OwnerController {
 
+	// Be warned any string in the controllers will be treated as address unless specified
 	private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
 
 	private final OwnerRepository owners;
@@ -55,16 +58,29 @@ class OwnerController {
 		this.owners = clinicService;
 	}
 
+	// @InitBinder is used here remove id field from showing on the pages
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
 	}
 
+	/**
+	 * the FindOwner function here checks if an owner with this id exists, if not creates
+	 * one,otherwise finds the existing owner by id
+	 * @ModelAttribute here is used as a method that should be called before any
+	 * other @GetMapping method is called to make sure that the owner exists before
+	 * interacting with it in order to avoid errors the return is read this way : is
+	 * ownerID equals to null ? Then create new owner,otherwise : find it by id
+	 */
 	@ModelAttribute("owner")
 	public Owner findOwner(@PathVariable(name = "ownerId", required = false) Integer ownerId) {
 		return ownerId == null ? new Owner() : this.owners.findById(ownerId);
 	}
 
+	/**
+	 * @GetMapping is the HTTP GET request here and is a shortened version of
+	 * @RequestMapping(method = RequestMethod.GET) with the address in the brackets
+	 */
 	@GetMapping("/owners/new")
 	public String initCreationForm(Map<String, Object> model) {
 		Owner owner = new Owner();
@@ -72,23 +88,31 @@ class OwnerController {
 		return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
 	}
 
+	/**
+	 *
+	 * @Valid does a validation for owner to make sure that the owner exists and it is
+	 * used for error handling by BindingResult result ,where in this case it prints a
+	 * message on error
+	 */
 	@PostMapping("/owners/new")
 	public String processCreationForm(@Valid Owner owner, BindingResult result, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			redirectAttributes.addFlashAttribute("error", "There was an error in creating the owner.");
 			return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
 		}
-
+		// owners.save in here references the OwnerRepository.java interface
 		this.owners.save(owner);
 		redirectAttributes.addFlashAttribute("message", "New Owner Created");
 		return "redirect:/owners/" + owner.getId();
 	}
 
+	// A simple redirect function
 	@GetMapping("/owners/find")
 	public String initFindForm() {
 		return "owners/findOwners";
 	}
 
+	// Start of the functions responsible for search and paginating
 	@GetMapping("/owners")
 	public String processFindForm(@RequestParam(defaultValue = "1") int page, Owner owner, BindingResult result,
 			Model model) {
@@ -129,7 +153,14 @@ class OwnerController {
 		Pageable pageable = PageRequest.of(page - 1, pageSize);
 		return owners.findByLastName(lastname, pageable);
 	}
+	// End of functions Related to Pagination and Search
 
+	/**
+	 * Here the @PathVariable is used in this way: Convert @PathVariable named ownerId
+	 * into integer type variable named ownerId model.addAttribute is responible to adding
+	 * additonal content to the page in this case it fills the form in the page
+	 *
+	 */
 	@GetMapping("/owners/{ownerId}/edit")
 	public String initUpdateOwnerForm(@PathVariable("ownerId") int ownerId, Model model) {
 		Owner owner = this.owners.findById(ownerId);
@@ -137,6 +168,10 @@ class OwnerController {
 		return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
 	}
 
+	/**
+	 * This @PostMapping is responsible for checking for validation and updating the owner
+	 *
+	 */
 	@PostMapping("/owners/{ownerId}/edit")
 	public String processUpdateOwnerForm(@Valid Owner owner, BindingResult result, @PathVariable("ownerId") int ownerId,
 			RedirectAttributes redirectAttributes) {
@@ -154,7 +189,10 @@ class OwnerController {
 	/**
 	 * Custom handler for displaying an owner.
 	 * @param ownerId the ID of the owner to display
-	 * @return a ModelMap with the model attributes for the view
+	 * @return a ModelMap with the model attributes for the view This Function loads
+	 * resources/templates/owners/ownerDetails.html as a base , adds an owner by id, and
+	 * then returns them together in one page ModelAndView where view is the html page and
+	 * model is the owner
 	 */
 	@GetMapping("/owners/{ownerId}")
 	public ModelAndView showOwner(@PathVariable("ownerId") int ownerId) {
@@ -164,6 +202,7 @@ class OwnerController {
 		return mav;
 	}
 
+	// My Confirmation Page for Deletion
 	@GetMapping("/owners/{ownerId}/remove")
 	public ModelAndView DeleteOwner(@PathVariable("ownerId") int ownerId) {
 		ModelAndView mav = new ModelAndView("owners/ownerDelete");
@@ -171,6 +210,8 @@ class OwnerController {
 		return mav;
 	}
 
+	// Actual deletion page without {ownerId} to avoid errors of incorrect address with a
+	// check whether the person is selected
 	@GetMapping("/owners/delete")
 	public String DeleteAct(Model model) {
 		if (OwnerToDelete != 0) {

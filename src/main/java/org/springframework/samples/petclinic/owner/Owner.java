@@ -40,7 +40,8 @@ import jakarta.validation.constraints.NotBlank;
  * @author Juergen Hoeller
  * @author Sam Brannen
  * @author Michael Isvy
- * @author Oliver Drotbohm
+ * @author Oliver Drotbohm The @Entity is the main object itself and @Table specifies the
+ * location of the table
  */
 @Entity
 @Table(name = "owners")
@@ -54,11 +55,20 @@ public class Owner extends Person {
 	@NotBlank
 	private String city;
 
+	/**
+	 * @Digits specifies the input type of the column , while parameter "fraction" sets
+	 * the max decimal length and integer sets the max lenght of the number
+	 */
 	@Column(name = "telephone")
 	@NotBlank
 	@Digits(fraction = 0, integer = 10)
 	private String telephone;
 
+	/**
+	 * @OneToMany here is used to get one or more pets of a singular owner based on their
+	 * id (owner id) . This is not a Column ,but a function List<Pet> Refers to @Table in
+	 * Pet.java in this specific project
+	 */
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "owner_id")
 	@OrderBy("name")
@@ -92,6 +102,10 @@ public class Owner extends Person {
 		return this.pets;
 	}
 
+	/**
+	 * An example of how isNew() function from BaseEntity is used- if the pet is new (it
+	 * does not have any id) ,add it to the pets List , defined above
+	 */
 	public void addPet(Pet pet) {
 		if (pet.isNew()) {
 			getPets().add(pet);

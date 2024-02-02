@@ -25,7 +25,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import java.util.Locale;
 
 /**
- * PetClinic Spring Boot Application.
+ * PetClinic Spring Boot Application. The main class that boots up the application
  *
  * @author Dave Syer
  *

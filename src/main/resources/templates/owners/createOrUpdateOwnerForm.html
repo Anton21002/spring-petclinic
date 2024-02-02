@@ -1,6 +1,18 @@
 <html xmlns:th="https://www.thymeleaf.org"
   th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
-
+<!--
+ 1.Page for updating owner , th means Thymeleaf function
+ 2.th:object specifies what object to use 
+ 3.th:replace="~{fragments/inputField :: input ('First Name', 'firstName', 'text')}"
+ Replacement Location :: Name Of a Fragment(th:fragment) within the replacement( Fragment Attributes )
+ th:replace replaces the input field by using the one in resources/templates/fragments/inputField.html
+ while using Fragment <th:block th:fragment="input (label, name, type)"> from inputField.html
+  where label is <label>...</label> , name and type <input name=...  type=... >
+4.<button
+          th:with="text=${owner['new']} ? 'Add Owner' : 'Update Owner'"
+          class="btn btn-primary" type="submit" th:text="${text}"
+th:with runs a check if a variable owner is new or not
+-->
 <body>
 
   <h2>Owner</h2>
