@@ -168,14 +168,14 @@ The Spring PetClinic sample application is released under version 2.0 of the [Ap
 ## What Was Done
 Add a page for deleting owner . For that , create a page to confirm the action,Run the deletion on the other page to avoid errors and redirect back to owner find
 ## Note 
-1. !! Replace the annotated with !! variable values in 
+1. !! Replace the  variable values annotated with !! in 
 main/resources/application.properties and application-mysql.properties
 before the first launch
 2.After Booting up The Shell editor ALWAYS run this two commands in the terminal 
 cd spring-petclinic/ 
-replace spring-petclinic/ with your own directory where pom.xml is located
+(replace spring-petclinic/ with your own directory where pom.xml is located)
 gcloud config set project cloud-computing-123456
- , replace cloud-computing-123456 with your own Project ID found in Cloud Overview
+(replace cloud-computing-123456 with your own Project ID found in Cloud Overview in Google Cloud)
 3.Make sure that both App Engine And your SQL instance are running (not updating) in Google Cloud
 4.Run mvn spring-javaformat:apply to fix formating error ,run it every time you change a file before
  mvn spring-boot:run  
@@ -188,3 +188,5 @@ git config --global user.name "FIRST_NAME LAST_NAME"
 7. Im not sure that you need a principal for this project or not (IAM in Google Cloud)
 8.Link to original installation process (Its already done here and updated to fit and fix the project)
 https://codelabs.developers.google.com/codelabs/cloud-spring-petclinic-cloudsql/index.html 
+9.Whethewer you update it will ask you to provide a message and then 
+click the check/tick on the top right right next to open files list
