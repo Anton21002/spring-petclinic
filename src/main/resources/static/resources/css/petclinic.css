@@ -9283,7 +9283,7 @@ textarea.form-control-lg {
   padding: 9px 12px; }
 
 .nav > li > a {
-  color: #838789; }
+  color: #f1f1f1; }
 
 .btn-primary {
   margin-top: 12px;
@@ -9476,6 +9476,7 @@ strong {
   font-family: "montserratregular", sans-serif;
   text-shadow: none;
   font-size: 14px;
+  color: lightgray;
   /* line-height: 14px; */
   padding: 28px 20px;
   transition: all 0.15s;
