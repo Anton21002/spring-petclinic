@@ -4,13 +4,24 @@
 
   <body>
 
-    <h2 th:text="#{welcome}">Welcome</h2>
+    <h2 tabindex="0" th:text="#{welcome}">Welcome</h2>
     <div class="row">
         <div class="col-md-12">
-          <img alt="Image of Puppy and Kitten" class="img-responsive" src="../static/resources/images/pets.png" th:src="@{/resources/images/pets.png}"/>
+          <img alt=" Image of Puppy and Kitten " class="img-responsive" src="../static/resources/images/pets.png" th:src="@{/resources/images/pets.png}"/>
         </div>
     </div>
-
+      <h3 tabindex="0" >Accessibility Statement for PetClinic</h3>
+      <div class="col-md-12">
+        <p tabindex="0">
+          The Website is confirmed to be accesible by Wave Acessibility tool . <br>
+          The Web Content Accessibility Guidelines (WCAG) defines requirements for designers and developers<br>
+           to improve accessibility for people with disabilities. <br>
+           It defines three levels of conformance: Level A, Level AA, and Level AAA. <br>
+           PetClinic is fully conformant with WCAG 2.1 level AA. <br>
+           Fully conformant means that the content fully conforms to the accessibility standard without any exceptions.<br>
+           Make sure that your browser does not have any keyboard traps.
+        </p>
+      </div>
   </body>
 
 </html>
