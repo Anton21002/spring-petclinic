@@ -1,3 +1,104 @@
+# Spring PetClinic – Applied Spring Boot Research Project
+## Overview
+
+This project is an applied research and exploration of Spring Boot conducted at the request of a university lecturer.
+The goal was to evaluate Spring Boot as a modern backend framework for educational use and to support curriculum modernization with tools that better reflect current industry practices.
+
+The project uses Spring PetClinic as a real-world reference application to analyze architecture, configuration, and development workflows commonly used in professional Java backend development.
+
+## Purpose of the Project
+
+Evaluate Spring Boot as a suitable framework for teaching modern backend development
+
+Explore industry-relevant practices instead of outdated academic examples
+
+Produce practical, explainable material that can be reused for teaching and curriculum updates
+
+Bridge the gap between academic learning and real-world software development
+
+This was not a typical coursework assignment, but a targeted research initiative requested by a lecturer to explore and validate newer technologies for long-term educational use.
+
+## What Was Explored
+
+Spring Boot application structure and auto-configuration
+
+Layered architecture (Controller / Service / Repository)
+
+RESTful API design principles
+
+Database integration using JPA / Hibernate
+
+Configuration management and environment-based setup
+
+Maintainability and readability of production-style codebases
+
+Version control and structured development workflow (Git)
+
+## Cloud & Environment Context
+
+- Application tested with a **cloud-hosted SQL database running on Google Cloud Platform**
+- Worked with **Google Cloud SQL** as the database backend instead of a purely local setup
+- Focus on understanding:
+  - Remote database connectivity
+  - Environment-based configuration
+  - Credentials and connection handling
+  - Cloud vs local development differences
+- Emphasis on building **cloud-ready Spring Boot applications** that can operate reliably with managed database services
+
+
+## Why Spring PetClinic
+
+Spring PetClinic was chosen because it:
+
+Represents a realistic, non-trivial Spring Boot application
+
+Demonstrates common enterprise patterns
+
+Is widely recognized in the Java ecosystem
+
+Serves as a strong baseline for evaluating framework suitability in both education and industry
+
+## Outcome
+
+Clear understanding of Spring Boot’s strengths for modern backend development
+
+Practical material and examples suitable for teaching and curriculum updates
+
+Transferable knowledge applicable to enterprise Java projects
+
+Strong foundation for working with Spring-based systems in professional environments
+
+## Technologies Used
+
+Java
+
+Spring Boot
+
+Spring MVC
+
+Spring Data JPA
+
+Hibernate
+
+SQL
+
+Git
+
+Google Cloud Platform (project/environment context)
+
+## Author
+
+Anton
+Software Developer
+Focus areas:
+
+Backend & full-stack development
+
+Legacy system analysis and modernization
+
+Applied research and technology evaluation
+
+Bridging technical implementation with business and educational needs
 ## What Was Done
 Added a page for deleting owner . For that ,it creates a page to confirm the action,Runs the deletion on the other page to avoid errors and redirects back to owner find page
 ## Note 
