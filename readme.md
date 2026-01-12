@@ -89,6 +89,7 @@ Google Cloud Platform (project/environment context)
 ## Author
 
 Anton
+
 Software Developer
 Focus areas:
 
